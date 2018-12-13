@@ -6,6 +6,8 @@ class Tooltip extends HTMLElement {
         this._tooltipContainer;
         this._tooltipText = 'Some dummy tooltip text.';
         this.attachShadow({ mode: 'open' });
+        const template = document.querySelector('#tooltip-template');
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
     }
 
     // lifecrycle methods
@@ -13,7 +15,13 @@ class Tooltip extends HTMLElement {
         if(this.hasAttributes('text')) {
             this._tooltipText = this.getAttribute('text');
         }
+        
+        // Find the span in the template
+        const tooltipIcon = this.shadowRoot.querySelector('span');
+        
+        // Create new span tag in the DOM
         const tooltipIcon = document.createElement('span');
+        
         tooltipIcon.textContent = ' (?)';
         tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
         tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
