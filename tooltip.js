@@ -6,8 +6,22 @@ class Tooltip extends HTMLElement {
         this._tooltipContainer;
         this._tooltipText = 'Some dummy tooltip text.';
         this.attachShadow({ mode: 'open' });
-        const template = document.querySelector('#tooltip-template');
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
+        // const template = document.querySelector('#tooltip-template');
+        // this.shadowRoot.appendChild(template.content.cloneNode(true))
+        
+        // The HTML template of the Custome Component and the Scope Style
+        this.shadowRoot.innerHTML = `
+            <style>
+                div {
+                    background-color: green;
+                    color: white;
+                    position: absolute;
+                    z-index: 10;
+                }
+            </style>
+            <span> (?)</span>
+            <slot>Some Default</slot>
+        `;
     }
 
     // lifecrycle methods
@@ -20,7 +34,7 @@ class Tooltip extends HTMLElement {
         const tooltipIcon = this.shadowRoot.querySelector('span');
         
         // Create new span tag in the DOM
-        const tooltipIcon = document.createElement('span');
+        //const tooltipIcon = document.createElement('span');
         
         tooltipIcon.textContent = ' (?)';
         tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
@@ -33,10 +47,10 @@ class Tooltip extends HTMLElement {
     _showTooltip() {
         this._tooltipContainer = document.createElement('div');
         this._tooltipContainer.textContent = this._tooltipText;
-        this._tooltipContainer.style.backgroundColor = 'green';
-        this._tooltipContainer.style.color = 'white';
-        this._tooltipContainer.style.position = 'absolute';
-        this._tooltipContainer.style.zIndex = 10;
+        // this._tooltipContainer.style.backgroundColor = 'green';
+        // this._tooltipContainer.style.color = 'white';
+        // this._tooltipContainer.style.position = 'absolute';
+        // this._tooltipContainer.style.zIndex = 10;
 
 
         this.shadowRoot.appendChild(this._tooltipContainer);
