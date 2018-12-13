@@ -7,10 +7,16 @@
     <title>Tooltip Custome Component</title>
     <script src="tooltip.js"></script>
     <script src="confirm-link.js"></script>
+    <style>
+        .highlight {
+            background-color: rgb(204, 243, 130);
+            /* border-bottom: 2px solid blue; */
+        }
+    </style>
 </head>
 <body>
     <!-- My Tooltip Component -->
-    <p>This is my <nk-tooltip text="Web Components is a set of standarts.">Web Component</nk-tooltip></p>
+    <p>This is my <nk-tooltip text="Web Components is a set of standarts."><span class="highlight">Web Component</span></nk-tooltip></p>
     <br>
     <nk-tooltip>Here we go!</nk-tooltip>
     <br>
