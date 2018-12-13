@@ -9,11 +9,13 @@
 </head>
 <body>
     <template id="tooltip-template">
-        <span> (?)</span>
+        <span> (?)</span><slot>Some Default</slot>
     </template>
     <!-- My Tooltip Component -->
     <p>This is my <nk-tooltip text="Web Components is a set of standarts.">Web Component</nk-tooltip></p>
     <br>
     <nk-tooltip>Here we go!</nk-tooltip>
+    <br>
+    <nk-tooltip></nk-tooltip>
 </body>
 </html>
