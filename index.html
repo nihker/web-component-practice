@@ -23,5 +23,14 @@
     </nk-modal>
     <p>Please confirm your choice.</p>
     <button>Show Details and Confirm</button>
+    <script>
+        const confirButton = document.querySelector('button');
+        const modal = document.querySelector('nk-modal');
+        
+        confirButton.addEventListener('click', () => {
+            modal.setAttribute('opened', '')
+        });
+
+    </script>
 </body>
 </html>
