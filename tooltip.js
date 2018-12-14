@@ -3,14 +3,10 @@ class Tooltip extends HTMLElement {
 
     constructor(){
         super();
-        this._tooltipContainer;
         this._tooltipText = 'Some dummy tooltip text.';
+        this._tooltipVisible = false;
         this._tooltipIcon;
         this.attachShadow({ mode: 'open' });
-        // const template = document.querySelector('#tooltip-template');
-        // this.shadowRoot.appendChild(template.content.cloneNode(true))
-        
-        // The HTML template of the Custome Component and the Scope Style
         this.shadowRoot.innerHTML = `
             <style>
                 div {
@@ -57,19 +53,46 @@ class Tooltip extends HTMLElement {
         `;
     }
 
-    // lifecrycle methods
     connectedCallback() {
         if(this.hasAttributes('text')) {
             this._tooltipText = this.getAttribute('text');
         }
-        
-       this._tooltipIcon = this.shadowRoot.querySelector('span');
+        this._tooltipIcon = this.shadowRoot.querySelector('span');
         this._tooltipIcon.textContent = ' (?)';
         this._tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
         this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
-        // this.shadowRoot.appendChild(tooltipIcon); // is in the template
         this.style.position = 'relative';
     }
+
+    disconnectedCallback() {
+        console.log('Disconnected Component and remove EventListner');
+        this._tooltipIcon.removeEventListener('mouseenter', this._showTooltip);
+        this._tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
+    }
+
+    _render() {
+        let tooltipContainer;
+        if(this._tooltipVisible) {
+            tooltipContainer = document.createElement('div');
+            tooltipContainer.textContent = this._tooltipText;
+            this.shadowRoot.appendChild(tooltipContainer);
+        } else {
+            if(tooltipContainer) {
+                this.shadowRoot.removeChild(tooltipContainer);
+            }
+        }
+    }
+
+    _showTooltip() {
+        this._tooltipVisible = true;
+        this._render();
+    }   
+
+    _hideTooltip() {
+        this._tooltipVisible = false;
+        this._render();
+    }
+
 
     // Watched attributes 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -82,38 +105,12 @@ class Tooltip extends HTMLElement {
         }
         console.log(name, oldValue, newValue);
     }
-
-    disconnectedCallback() {
-        console.log('Disconnected Component and remove EventListner');
-        this._tooltipIcon.removeEventListener('mouseenter', this._showTooltip);
-        this._tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
-    }
-
     static get observedAttributes() {
         // add attributes we will watched 
         return ['text'];
     }
 
     // Watched attributes end
-
-    // private methods
-    _showTooltip() {
-        this._tooltipContainer = document.createElement('div');
-        this._tooltipContainer.textContent = this._tooltipText;
-        // this._tooltipContainer.style.backgroundColor = 'green';
-        // this._tooltipContainer.style.color = 'white';
-        // this._tooltipContainer.style.position = 'absolute';
-        // this._tooltipContainer.style.zIndex = 10;
-
-
-        this.shadowRoot.appendChild(this._tooltipContainer);
-    }
-
-    _hideTooltip() {
-        this.shadowRoot.removeChild(this._tooltipContainer);
-    }
-
-
 }
 
 // definde the name of the HTML component and add the class (for exp. Tooltip)
