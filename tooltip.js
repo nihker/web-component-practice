@@ -19,6 +19,12 @@ class Tooltip extends HTMLElement {
                     z-index: 10;
                 }
 
+                // nk-tooltip.importent
+                
+                :host(.importent) {
+                    background: lightgrey;
+                }
+
                 .highlight {
                     background-color: red;
                 }
@@ -26,8 +32,17 @@ class Tooltip extends HTMLElement {
                 ::slotted(.highlight) {
                     border-bottom: 1px dotted red;
                 }
+
+                .icon {
+                    background: black;
+                    color: white;
+                    padding: 0.25rem 0.5rem;
+                    text-align: center;
+                    border-radius: 50%;
+
+                }
             </style>
-            <span> (?)</span>
+            <span class="icon"> (?)</span>
             <slot>Some Default</slot>
         `;
     }
