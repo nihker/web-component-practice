@@ -13,16 +13,21 @@ class Tooltip extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 div {
+                    font-weight: normal;
                     background-color: green;
                     color: white;
                     position: absolute;
                     z-index: 10;
+                    padding: 0.15rem;
+                    border-radius: 3px;
+                    box-shadow: 1px 1px 6px rgba(0,0,0,0,0.26);
+                    top: 1.5rem;
+                    left: 0.75rem;
                 }
 
-                // nk-tooltip.importent
-
-                :host(.importent) {
-                    background: lightgrey;
+                :host(.important) {
+                    background: var(--color-primary, #ccc);
+                    padding: 0.5rem;
                 }
 
                 :host-context(p) {
