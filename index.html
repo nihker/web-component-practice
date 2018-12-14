@@ -29,8 +29,10 @@
         
         confirButton.addEventListener('click', () => {
             //modal.setAttribute('opened', '')
-            console.log('Call button 1');
-            modal.open();
+            if(!modal.isOpen) {
+                modal.open();
+                console.log('Opening...');
+            }
         });
 
     </script>
