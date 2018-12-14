@@ -62,6 +62,7 @@ class Tooltip extends HTMLElement {
         this._tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
         this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
         this.style.position = 'relative';
+        this._render();
     }
 
     disconnectedCallback() {
@@ -71,7 +72,7 @@ class Tooltip extends HTMLElement {
     }
 
     _render() {
-        let tooltipContainer;
+        let tooltipContainer = this.shadowRoot.querySelector('div');
         if(this._tooltipVisible) {
             tooltipContainer = document.createElement('div');
             tooltipContainer.textContent = this._tooltipText;
