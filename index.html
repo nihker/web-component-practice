@@ -27,6 +27,14 @@
     <script>
         const confirButton = document.querySelector('button');
         const modal = document.querySelector('nk-modal');
+
+        modal.addEventListener('confirm', () => {
+            console.log('Confirm...');
+        });
+
+        modal.addEventListener('cancel', () => {
+            console.log('Cancel...');
+        });
         
         confirButton.addEventListener('click', () => {
             //modal.setAttribute('opened', '')
