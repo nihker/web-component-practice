@@ -18,6 +18,13 @@ class Modal extends HTMLElement {
 
                 }
 
+                :host([opened]) #backdrop,
+                :host([opened]) #modal {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+
                 #modal {
                     position: fixed;
                     top: 15vh;
@@ -90,6 +97,10 @@ class Modal extends HTMLElement {
         `;
     }
 
+    open() {
+        console.log('Call button 2');
+        this.setAttribute('opened', '');
+    }
 }
 
 customElements.define('nk-modal', Modal);
