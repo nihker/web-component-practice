@@ -5,6 +5,7 @@ class Tooltip extends HTMLElement {
         super();
         this._tooltipContainer;
         this._tooltipText = 'Some dummy tooltip text.';
+        this._tooltipIcon;
         this.attachShadow({ mode: 'open' });
         // const template = document.querySelector('#tooltip-template');
         // this.shadowRoot.appendChild(template.content.cloneNode(true))
@@ -62,22 +63,30 @@ class Tooltip extends HTMLElement {
             this._tooltipText = this.getAttribute('text');
         }
         
-        // Find the span in the template
-        const tooltipIcon = this.shadowRoot.querySelector('span');
-        
-        // Create new span tag in the DOM
-        //const tooltipIcon = document.createElement('span');
-        
-        tooltipIcon.textContent = ' (?)';
-        tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
-        tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
-        this.shadowRoot.appendChild(tooltipIcon);
+       this._tooltipIcon = this.shadowRoot.querySelector('span');
+        this._tooltipIcon.textContent = ' (?)';
+        this._tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this));
+        this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this));
+        // this.shadowRoot.appendChild(tooltipIcon); // is in the template
         this.style.position = 'relative';
     }
 
     // Watched attributes 
     attributeChangedCallback(name, oldValue, newValue) {
+        if(oldValue === newValue) {
+            return;
+        }
+
+        if(name === 'text'){
+            this._tooltipText = newValue;
+        }
         console.log(name, oldValue, newValue);
+    }
+
+    disconnectedCallback() {
+        console.log('Disconnected Component and remove EventListner');
+        this._tooltipIcon.removeEventListener('mouseenter', this._showTooltip);
+        this._tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
     }
 
     static get observedAttributes() {
