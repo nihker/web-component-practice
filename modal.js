@@ -50,6 +50,22 @@ class Modal extends HTMLElement {
 
                 #actions button {
                     margin: 0 0.25rem;
+                    border: none;
+                    color: white;
+                    padding: 10px 17px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+
+                #actions button#cancel {
+                    background-color: red;
+                }
+
+                #actions button#confirm {
+                    background-color: green;
                 }
 
             </style>
@@ -62,8 +78,8 @@ class Modal extends HTMLElement {
                     <slot></slot>
                 </section>
                 <section id="actions">
-                    <button>Cancel</button>
-                    <button>Ok</button>
+                    <button id="cancel">Cancel</button>
+                    <button id="confirm">Ok</button>
                 </section>
             </div>
         `;
