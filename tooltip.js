@@ -22,6 +22,10 @@ class Tooltip extends HTMLElement {
                     left: 0.75rem;
                 }
 
+                :host {
+                    position: relative;
+                }
+
                 :host(.important) {
                     background: var(--color-primary, #ccc);
                     padding: 0.5rem;
