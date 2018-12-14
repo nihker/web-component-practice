@@ -20,9 +20,13 @@ class Tooltip extends HTMLElement {
                 }
 
                 // nk-tooltip.importent
-                
+
                 :host(.importent) {
                     background: lightgrey;
+                }
+
+                :host-context(p) {
+                    font-weight: bold;
                 }
 
                 .highlight {
