@@ -143,12 +143,16 @@ class Modal extends HTMLElement {
         this.hide();
 
         // send outside message this modal is cancel with dispatch Event
-        const cancelEvent = new Event('cancel');
+        // composed set of TRUE and after this work the Event outside the Shadow DOM
+        const cancelEvent = new Event('cancel', { bubbles: true, composed: true });
         event.target.dispatchEvent(cancelEvent);
     }
 
     _confirm() {
         this.hide();
+        // This is the shorter method 
+        const confiremEvent = new Event('confirm');
+        this.dispatchEvent(confiremEvent);
     }
 }
 
