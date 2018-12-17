@@ -102,9 +102,11 @@ class Modal extends HTMLElement {
             console.dir(slots[1].assignedNodes());
         });
 
+        const backDrop = this.shadowRoot.querySelector('#backdrop');
         const cancelButton = this.shadowRoot.querySelector('#cancel-btn');
         const confirmButton = this.shadowRoot.querySelector('#confirm-btn');
         
+        backDrop.addEventListener('click', this._cancel.bind(this));
         cancelButton.addEventListener('click', this._cancel.bind(this));
         confirmButton.addEventListener('click', this._confirm.bind(this));
 
