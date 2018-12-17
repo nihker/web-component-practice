@@ -25,10 +25,14 @@ class Modal extends HTMLElement {
                     pointer-events: all;
                 }
 
+                :host([opened]) #modal {
+                    top: 15vh;
+                }
+
 
                 #modal {
                     position: fixed;
-                    top: 15vh;
+                    top: 10vh;
                     left: 25%;
                     width: 50%;
                     z-index: 100;
@@ -40,6 +44,7 @@ class Modal extends HTMLElement {
                     justify-content: space-between;
                     opacity: 0;
                     pointer-events: none;
+                    transition: all 0.3s ease-out;
                 }
                 
                 header {
@@ -48,10 +53,12 @@ class Modal extends HTMLElement {
 
                 #main {
                     padding: 1rem;
+                    border-top: 1px solid #ccc;
                 }
 
                 ::sloted(h1) {
                     font-size: 1.25rem;
+                    margin: 0;
                 }
 
                 #actions {
