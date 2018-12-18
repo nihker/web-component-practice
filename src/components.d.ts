@@ -42,9 +42,11 @@ export namespace Components {
   }
 
   interface NkSideDrawer {
+    'open': boolean;
     'title': string;
   }
   interface NkSideDrawerAttributes extends StencilHTMLAttributes {
+    'open'?: boolean;
     'title'?: string;
   }
 }
