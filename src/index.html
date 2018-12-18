@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+  <script src="/build/mycomponent.js"></script>
+
+</head>
+<body>
+
+  <nk-side-drawer title="My Menu">
+
+  </nk-side-drawer>
+
+  <script>
+    const sideDrawer = document.querySelector('nk-side-drawer');
+    setTimeout(() => {
+      sideDrawer.title = 'Its new title';
+    }, 3000)
+  </script>
+
+</body>
+</html>
