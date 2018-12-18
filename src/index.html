@@ -25,7 +25,7 @@
   </style>
 </head>
 <body>
-
+  <button id="side-draw-button">Open Side Menu</button>
   <nk-side-drawer title="My Menu">
     <nav class="side-nav">
       <ul>
@@ -40,7 +40,15 @@
     const sideDrawer = document.querySelector('nk-side-drawer');
     setTimeout(() => {
       // sideDrawer.open = true;
-    }, 3000)
+    }, 3000);
+
+    const sideDraweButton = document.querySelector('#side-draw-button');
+    sideDraweButton.addEventListener('click', () => {
+      if(!sideDrawer.open) {
+        console.log('Opening side draw...');
+        sideDrawer.open = true;
+      }
+    });
   </script>
 
 </body>
