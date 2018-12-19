@@ -1,4 +1,4 @@
-import { Component, Prop, State } from "@stencil/core";
+import { Component, Prop, State, Method } from "@stencil/core";
 
 
 @Component({
@@ -11,15 +11,20 @@ export class SideDrawer {
     @State() showContactInfo = false;
 
     @Prop({ reflectToAttr: true }) title: string;
-    @Prop({ reflectToAttr: true, mutable: true }) open: boolean;
+    @Prop({ reflectToAttr: true, mutable: true }) opened: boolean;
 
     onCloseDrawer() {
         console.log("Close Drawer inside the Component....");
-        this.open = false;
+        this.opened = false;
     }
 
     onContentChange(content: string) {
         this.showContactInfo = content === 'contact';
+    }
+
+    @Method()
+    open() {
+        this.opened = true;
     }
 
     render() {
@@ -43,8 +48,8 @@ export class SideDrawer {
                     <button onClick={this.onCloseDrawer.bind(this)}>X</button>
                 </header>
                 <section id="tabs">
-                    <button class="active" onClick={this.onContentChange.bind(this, 'nav')}>Navigation</button>
-                    <button onClick={this.onContentChange.bind(this, 'contact')}>Contact</button>
+                    <button class={!this.showContactInfo ? 'active': ''} onClick={this.onContentChange.bind(this, 'nav')}>Navigation</button>
+                    <button class={this.showContactInfo ? 'active': ''} onClick={this.onContentChange.bind(this, 'contact')}>Contact</button>
                 </section>
                 <main>
                     {mainContent}

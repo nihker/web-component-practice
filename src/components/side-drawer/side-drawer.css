@@ -11,7 +11,7 @@ aside {
 }
 
 /* withe the shadow dom */
-:host([open]) aside {
+:host([opened]) aside {
     left: 0;
 }
 

@@ -44,9 +44,10 @@
 
     const sideDraweButton = document.querySelector('#side-draw-button');
     sideDraweButton.addEventListener('click', () => {
-      if(!sideDrawer.open) {
+      if(!sideDrawer.opened) {
         console.log('Opening side draw...');
-        sideDrawer.open = true;
+        // sideDrawer.open = true;
+        sideDrawer.open();
       }
     });
   </script>
