@@ -63,11 +63,16 @@ header button:focus {
 }
 
 #tabs button.active,
-#tabs button.hover {
+#tabs button:hover,
+#tabs button:active {
     background: black;
     color: white;
 }
 
 #tabs button.focus {
     outline: none;
+}
+
+#contact-info {
+    padding: 0 2rem;
 }
