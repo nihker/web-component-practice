@@ -5,52 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
   <script src="/build/mycomponent.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-
-    .side-nav ul {
-      list-style: none;
-    }
-
-    .side-nav li {
-      margin: 1rem 0;
-    }
-
-    .side-nav a {
-      text-decoration: none;
-      color: black;
-    }
-  </style>
 </head>
 <body>
-  <button id="side-draw-button">Open Side Menu</button>
-  <nk-side-drawer title="My Menu">
-    <nav class="side-nav">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/">Abput</a></li>
-        <li><a href="/">Contact</a></li>
-      </ul>
-    </nav>
-  </nk-side-drawer>
-
-  <script>
-    const sideDrawer = document.querySelector('nk-side-drawer');
-    setTimeout(() => {
-      // sideDrawer.open = true;
-    }, 3000);
-
-    const sideDraweButton = document.querySelector('#side-draw-button');
-    sideDraweButton.addEventListener('click', () => {
-      if(!sideDrawer.opened) {
-        console.log('Opening side draw...');
-        // sideDrawer.open = true;
-        sideDrawer.open();
-      }
-    });
-  </script>
-
+  
 </body>
 </html>
