@@ -41,26 +41,19 @@ export namespace Components {
     'middle'?: string;
   }
 
-  interface NkSideDrawer {
-    'open': () => void;
-    'opened': boolean;
-    'title': string;
-  }
-  interface NkSideDrawerAttributes extends StencilHTMLAttributes {
-    'opened'?: boolean;
-    'title'?: string;
-  }
+  interface NkStockPrice {}
+  interface NkStockPriceAttributes extends StencilHTMLAttributes {}
 }
 
 declare global {
   interface StencilElementInterfaces {
     'MyComponent': Components.MyComponent;
-    'NkSideDrawer': Components.NkSideDrawer;
+    'NkStockPrice': Components.NkStockPrice;
   }
 
   interface StencilIntrinsicElements {
     'my-component': Components.MyComponentAttributes;
-    'nk-side-drawer': Components.NkSideDrawerAttributes;
+    'nk-stock-price': Components.NkStockPriceAttributes;
   }
 
 
@@ -70,20 +63,20 @@ declare global {
     new (): HTMLMyComponentElement;
   };
 
-  interface HTMLNkSideDrawerElement extends Components.NkSideDrawer, HTMLStencilElement {}
-  var HTMLNkSideDrawerElement: {
-    prototype: HTMLNkSideDrawerElement;
-    new (): HTMLNkSideDrawerElement;
+  interface HTMLNkStockPriceElement extends Components.NkStockPrice, HTMLStencilElement {}
+  var HTMLNkStockPriceElement: {
+    prototype: HTMLNkStockPriceElement;
+    new (): HTMLNkStockPriceElement;
   };
 
   interface HTMLElementTagNameMap {
     'my-component': HTMLMyComponentElement
-    'nk-side-drawer': HTMLNkSideDrawerElement
+    'nk-stock-price': HTMLNkStockPriceElement
   }
 
   interface ElementTagNameMap {
     'my-component': HTMLMyComponentElement;
-    'nk-side-drawer': HTMLNkSideDrawerElement;
+    'nk-stock-price': HTMLNkStockPriceElement;
   }
 
 
