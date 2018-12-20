@@ -41,8 +41,12 @@ export namespace Components {
     'middle'?: string;
   }
 
-  interface NkStockPrice {}
-  interface NkStockPriceAttributes extends StencilHTMLAttributes {}
+  interface NkStockPrice {
+    'stockSymbol': string;
+  }
+  interface NkStockPriceAttributes extends StencilHTMLAttributes {
+    'stockSymbol'?: string;
+  }
 }
 
 declare global {
