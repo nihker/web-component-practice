@@ -41,6 +41,9 @@ export namespace Components {
     'middle'?: string;
   }
 
+  interface NkSpinner {}
+  interface NkSpinnerAttributes extends StencilHTMLAttributes {}
+
   interface NkStockFinder {}
   interface NkStockFinderAttributes extends StencilHTMLAttributes {
     'onNksymbolSelected'?: (event: CustomEvent<string>) => void;
@@ -57,12 +60,14 @@ export namespace Components {
 declare global {
   interface StencilElementInterfaces {
     'MyComponent': Components.MyComponent;
+    'NkSpinner': Components.NkSpinner;
     'NkStockFinder': Components.NkStockFinder;
     'NkStockPrice': Components.NkStockPrice;
   }
 
   interface StencilIntrinsicElements {
     'my-component': Components.MyComponentAttributes;
+    'nk-spinner': Components.NkSpinnerAttributes;
     'nk-stock-finder': Components.NkStockFinderAttributes;
     'nk-stock-price': Components.NkStockPriceAttributes;
   }
@@ -72,6 +77,12 @@ declare global {
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
+  };
+
+  interface HTMLNkSpinnerElement extends Components.NkSpinner, HTMLStencilElement {}
+  var HTMLNkSpinnerElement: {
+    prototype: HTMLNkSpinnerElement;
+    new (): HTMLNkSpinnerElement;
   };
 
   interface HTMLNkStockFinderElement extends Components.NkStockFinder, HTMLStencilElement {}
@@ -88,12 +99,14 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'my-component': HTMLMyComponentElement
+    'nk-spinner': HTMLNkSpinnerElement
     'nk-stock-finder': HTMLNkStockFinderElement
     'nk-stock-price': HTMLNkStockPriceElement
   }
 
   interface ElementTagNameMap {
     'my-component': HTMLMyComponentElement;
+    'nk-spinner': HTMLNkSpinnerElement;
     'nk-stock-finder': HTMLNkStockFinderElement;
     'nk-stock-price': HTMLNkStockPriceElement;
   }
