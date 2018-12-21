@@ -1,4 +1,4 @@
-import { Component, State, Element, Prop, Watch } from "@stencil/core";
+import { Component, State, Element, Prop, Watch, Listen } from "@stencil/core";
 import { AV_API_KEY } from "../../global/global";
 
 @Component({
@@ -22,6 +22,7 @@ export class StockPrice {
     stockSymbolChange (newValue: string, oldValue:string) {
         if(newValue !== oldValue) {
             this.stockUserInput = newValue;
+            this.stockInputValid = true;
             this.fetchStockPrice(newValue);
         }
     }
@@ -70,6 +71,15 @@ export class StockPrice {
     // Unload
     componentDidUnload() {
         console.log('Component Did Unload');
+    }
+
+    // @Listen('nksymbolSelected') listen to only in the component dom (shadoDom)
+    @Listen('body:nksymbolSelected') // listen globaly (in the body)
+    onStockSymbolSelected(event: CustomEvent) {
+        console.log('stock symbol selected: ' + event.detail)
+        if(event.detail && event.detail !== this.stockSymbol) {
+            this.stockSymbol = event.detail;
+        }
     }
 
     fetchStockPrice(stockSymbol: string) {
