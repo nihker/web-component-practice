@@ -41,6 +41,9 @@ export namespace Components {
     'middle'?: string;
   }
 
+  interface NkStockFinder {}
+  interface NkStockFinderAttributes extends StencilHTMLAttributes {}
+
   interface NkStockPrice {
     'stockSymbol': string;
   }
@@ -52,11 +55,13 @@ export namespace Components {
 declare global {
   interface StencilElementInterfaces {
     'MyComponent': Components.MyComponent;
+    'NkStockFinder': Components.NkStockFinder;
     'NkStockPrice': Components.NkStockPrice;
   }
 
   interface StencilIntrinsicElements {
     'my-component': Components.MyComponentAttributes;
+    'nk-stock-finder': Components.NkStockFinderAttributes;
     'nk-stock-price': Components.NkStockPriceAttributes;
   }
 
@@ -67,6 +72,12 @@ declare global {
     new (): HTMLMyComponentElement;
   };
 
+  interface HTMLNkStockFinderElement extends Components.NkStockFinder, HTMLStencilElement {}
+  var HTMLNkStockFinderElement: {
+    prototype: HTMLNkStockFinderElement;
+    new (): HTMLNkStockFinderElement;
+  };
+
   interface HTMLNkStockPriceElement extends Components.NkStockPrice, HTMLStencilElement {}
   var HTMLNkStockPriceElement: {
     prototype: HTMLNkStockPriceElement;
@@ -75,11 +86,13 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'my-component': HTMLMyComponentElement
+    'nk-stock-finder': HTMLNkStockFinderElement
     'nk-stock-price': HTMLNkStockPriceElement
   }
 
   interface ElementTagNameMap {
     'my-component': HTMLMyComponentElement;
+    'nk-stock-finder': HTMLNkStockFinderElement;
     'nk-stock-price': HTMLNkStockPriceElement;
   }
 
