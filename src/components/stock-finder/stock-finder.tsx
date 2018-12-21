@@ -1,4 +1,4 @@
-import { Component, State} from '@stencil/core';
+import { Component, State,Event, EventEmitter} from '@stencil/core';
 import { AV_API_KEY } from '../../global/global';
 
 @Component({
@@ -12,6 +12,8 @@ export class StockFinder {
     stockNameInput: HTMLInputElement;
 
     @State() searchResults: {symbol: string, name: string}[] = [];
+
+    @Event({bubbles: true, composed: true}) nksymbolSelected: EventEmitter<string>;
 
     onFindStocks(event: Event) {
         event.preventDefault();
@@ -27,6 +29,10 @@ export class StockFinder {
             });
     }
 
+    onSelectSymbol(symbol: string) {
+        this.nksymbolSelected.emit(symbol);
+    }
+
     render() {
         return [
             <form onSubmit={this.onFindStocks.bind(this)}>
@@ -38,7 +44,7 @@ export class StockFinder {
             </form>,
             <ul>
                 {this.searchResults.map(res => (
-                    <li><strong>{res.symbol}</strong> - {res.name}</li>
+                    <li onClick={this.onSelectSymbol.bind(this, res.symbol)}><strong>{res.symbol}</strong> - {res.name}</li>
                 ))}
             </ul>,
         ];

@@ -42,7 +42,9 @@ export namespace Components {
   }
 
   interface NkStockFinder {}
-  interface NkStockFinderAttributes extends StencilHTMLAttributes {}
+  interface NkStockFinderAttributes extends StencilHTMLAttributes {
+    'onNksymbolSelected'?: (event: CustomEvent<string>) => void;
+  }
 
   interface NkStockPrice {
     'stockSymbol': string;
