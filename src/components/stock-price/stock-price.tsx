@@ -33,30 +33,53 @@ export class StockPrice {
         this.fetchStockPrice(stockSymbol);
     }
 
+    // LIFECYCLE HOOK'S
+    // Load
+    componentWillLoad() {
+        console.log('Component will load');
+        console.log(this.stockSymbol);
+        this.fetchPrice = 0;
+    }
+
     componentDidLoad(){
+        console.log('Component will Load')
         if(this.stockSymbol) {
             this.fetchStockPrice(this.stockSymbol);
         }
     }
 
+    // Update
+    componentWillUpdate() {
+        console.log('Component will Update');
+    }
+
+    componentDidUpdate() {
+        console.log('Component Did Update');
+    }
+
+    // Unload
+    componentDidUnload() {
+        console.log('Component Did Unload');
+    }
+
     fetchStockPrice(stockSymbol: string) {
         fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${AV_API_KEY}`)
-        .then(res => {
-            if(res.status !== 200) {
-                throw new Error('Invalid!');
-            }
-            return res.json();
-        })
-        .then( parseRes => {
-            if(!parseRes['Global Quote']['05. price']) {
-                throw new Error('Invalid symbol!');
-            }
-            this.error = null;
-            this.fetchPrice = +parseRes['Global Quote']['05. price'];
-        })
-        .catch(err => {
-           this.error = err.message;
-        });
+            .then(res => {
+                if(res.status !== 200) {
+                    throw new Error('Invalid!');
+                }
+                return res.json();
+            })
+            .then( parseRes => {
+                if(!parseRes['Global Quote']['05. price']) {
+                    throw new Error('Invalid symbol!');
+                }
+                this.error = null;
+                this.fetchPrice = +parseRes['Global Quote']['05. price'];
+            })
+            .catch(err => {
+            this.error = err.message;
+            });
     }
 
     render() {
