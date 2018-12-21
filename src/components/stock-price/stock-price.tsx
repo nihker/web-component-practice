@@ -1,4 +1,4 @@
-import { Component, State, Element, Prop } from "@stencil/core";
+import { Component, State, Element, Prop, Watch } from "@stencil/core";
 import { AV_API_KEY } from "../../global/global";
 
 @Component({
@@ -9,15 +9,22 @@ import { AV_API_KEY } from "../../global/global";
 export class StockPrice {
 
     stockInput: HTMLInputElement;
-    initalStockSymbol: string;
-
+    
     @Element()  el: HTMLElement;
     @State() fetchPrice: number;
     @State() stockUserInput: string;
     @State() stockInputValid = false;
     @State() error: string;
 
-    @Prop() stockSymbol: string;
+    @Prop({mutable: true, reflectToAttr: true}) stockSymbol: string;
+
+    @Watch('stockSymbol')
+    stockSymbolChange (newValue: string, oldValue:string) {
+        if(newValue !== oldValue) {
+            this.stockUserInput = newValue;
+            this.fetchStockPrice(newValue);
+        }
+    }
 
     onUserInput(event: Event) {
         this.stockUserInput = (event.target as HTMLInputElement).value;
@@ -30,9 +37,7 @@ export class StockPrice {
 
     onFetchStockPrice(event: Event) {
         event.preventDefault();
-        //const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value;
-        const stockSymbol = this.stockInput.value;
-        this.fetchStockPrice(stockSymbol);
+        this.stockSymbol = this.stockInput.value;
     }
 
     // LIFECYCLE HOOK'S
@@ -46,7 +51,7 @@ export class StockPrice {
     componentDidLoad(){
         console.log('Component will Load')
         if(this.stockSymbol) {
-            this.initalStockSymbol = this.stockSymbol;
+            // this.initalStockSymbol = this.stockSymbol;
             this.stockUserInput = this.stockSymbol;
             this.stockInputValid = true;
             this.fetchStockPrice(this.stockSymbol);
@@ -60,10 +65,6 @@ export class StockPrice {
 
     componentDidUpdate() {
         console.log('Component Did Update');
-        if(this.stockSymbol !== this.initalStockSymbol) {
-            this.initalStockSymbol = this.stockSymbol;
-            this.fetchStockPrice(this.stockSymbol);
-        }
     }
 
     // Unload
