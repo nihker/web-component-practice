@@ -55,9 +55,7 @@ export class StockFinder {
                 />
                 <button type="submit">Find!</button>
             </form>,
-            <ul>
-                {content}
-            </ul>,
+            content
         ];
     }
 }
